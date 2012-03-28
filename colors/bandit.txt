@@ -35,7 +35,7 @@ Dark:
 	EnumerationName:#FF22FF
 	Member:DarkGrey
 	Union:Grey
-	GlobalVariable:#666600
+	GlobalVariable:#888800
 	LocalVariable:#AAA14C
 	GlobalConstant:#BBBB00
 	Type:#FF8000
@@ -43,8 +43,13 @@ Dark:
 	Structure:#FF8080
 	Special:Red
 	SpecialChar:#AA0000
+<<<<<<< HEAD
+	SpecialKey:#777777
+	NonText:#777777
+=======
 	SpecialKey:DavysGrey
 	NonText:DavysGrey
+>>>>>>> 411744f2fb95ae2b146d8aed2ae420de7a04a3b3
 	MatchParen:Yellow,Style=Underline
 	Error:White,Red
 	NonIndentTabError:SP=#FFAA00,Style=Undercurl
