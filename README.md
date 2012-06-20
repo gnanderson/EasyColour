@@ -6,11 +6,10 @@ There's more information available on the website:
 
   [http://www.cgtk.co.uk/vim-scripts/easycolour][Website]
 
-The source is managed in Mercurial and is available on [bitbucket][Bitbucket].  It is also mirrored on [github][Github].
+The source is managed in Mercurial and is available on [bitbucket][Bitbucket].
 
 Detailed documentation can be found in [doc/EasyColour.txt][Documentation].
 
 [Website]: http://www.cgtk.co.uk/vim-scripts/easycolour
 [Bitbucket]: https://bitbucket.org/abudden/easycolour
-[Github]: https://github.com/abudden/EasyColour
 [Documentation]: https://bitbucket.org/abudden/easycolour/src/default/doc/EasyColour.txt
