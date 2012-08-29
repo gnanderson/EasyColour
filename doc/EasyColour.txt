@@ -195,7 +195,8 @@ Copyright:  (c) 2011-2012 by A. S. Budden                  *EasyColour-copyright
 		* Foreground Colour
 		* Background Colour
 		* Special Colour (the colour of undercurls)
-		* Style (choose from 'Underline', 'Undercurl', 'Bold' etc)
+		* Style (choose from 'Underline', 'Undercurl', 'Bold' etc or combine
+		  them with '&' as a delimeter)
 	
 	So the line 'Error:Yellow,Red' will make errors be shown as yellow text on
 	a red background.  There are other ways to define colours as well; these
@@ -369,7 +370,8 @@ Copyright:  (c) 2011-2012 by A. S. Budden                  *EasyColour-copyright
 		* Foreground Colour
 		* Background Colour
 		* Special Colour (the colour of undercurls)
-		* Style (choose from 'Underline', 'Undercurl', 'Bold' etc)
+		* Style (choose from 'Underline', 'Undercurl', 'Bold' etc or combine
+		  them with '&' as a delimeter)
 
 	The special colour is treated slightly differently in non-GUI Vim.  It is
 	usually set in order to specify the colour of an undercurl.  However, in
@@ -410,6 +412,9 @@ Copyright:  (c) 2011-2012 by A. S. Budden                  *EasyColour-copyright
 		---># This makes the sign column have a dark grey background
 		---># with the default (white in this case) text.
 		--->SignColumn:BG=#222222
+		--->
+		---># This makes constants yellow, bold and underlined
+		--->Constant:#ffff66,Style=Bold&Underline
 <
 2.4.6 Linking Highlight Groups         *EasyColour-links*                   {{{3
 
@@ -442,6 +447,10 @@ Copyright:  (c) 2011-2012 by A. S. Budden                  *EasyColour-copyright
 
 ==============================================================================
 3. EasyColour History                  *EasyColour-history*                 {{{1
+
+1.1.2: Xth Xxxxxxx 2012        : Added support for multiple styles for a
+                                 single group (thanks to Zhao Cai for the
+                                 suggestion).
 
 1.1.1: 7th March 2012          : Added rgb.txt to distribution.
 
