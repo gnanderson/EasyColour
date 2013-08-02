@@ -1,0 +1,26 @@
+# Saving this file will update the current colour scheme.
+
+Basis:bandit
+Dark:
+	Comment:#808080
+	Normal:White,#1c1c1c
+	LineNr:#bbbbbb,#1c1c1c
+	String:#ABF034
+	PreProc:#F2216A,Style=Bold
+	Include:@PreProc
+	Define,Macro:#5555FF,Style=Bold
+	PreCondit:#8888FF,Style=Bold
+	Statement:@PreProc
+	Type:#668FFF
+	Operator:#FA8F23
+	Label:#F2216A
+	Todo:#bbbbbb,#3c3c3c
+	Special:Red,Style=Bold
+	Conditional:@PreProc
+	Repeat:@PreProc
+	Function:@PreProc
+	CursorLine:BG=#242424
+	CursorLineNr:#FA8F23,#242424
+	VertSplit:#bbbbbb,#1c1c1c
+
+# vim: ff=unix:noet:ft=EasyColour
