@@ -18,7 +18,7 @@ Dark:
 	Special:Red,Style=Bold
 	Conditional:@PreProc
 	Repeat:@PreProc
-	Function:@PreProc
+	Function:#87afff,Style=Bold
 	CursorLine:BG=#242424
 	CursorLineNr:#FA8F23,#242424
 	VertSplit:#bbbbbb,#1c1c1c
