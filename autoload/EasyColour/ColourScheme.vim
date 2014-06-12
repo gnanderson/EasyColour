@@ -1,6 +1,6 @@
 " Easy Colour:
 "   Author:  A. S. Budden <abudden _at_ gmail _dot_ com>
-" Copyright: Copyright (C) 2011-2012 A. S. Budden
+" Copyright: Copyright (C) 2011 A. S. Budden
 "            Permission is hereby granted to use and distribute this code,
 "            with or without modifications, provided that this copyright
 "            notice is copied with it. Like anything else that's free,
@@ -20,6 +20,7 @@ catch
 endtry
 let g:loaded_EasyColourColourScheme = 1
 
+let s:need_to_write_cache = 0
 if ! exists('g:EasyColourDebug')
 	let g:EasyColourDebug = 0
 endif
@@ -32,7 +33,10 @@ function! EasyColour#ColourScheme#LoadColourScheme(name)
 		endif
 		exe command
 	endfor
-	call EasyColour#Translate#WriteColourCache()
+	if s:need_to_write_cache == 1
+		call EasyColour#Translate#WriteColourCache()
+		let s:need_to_write_cache = 0
+	endif
 	let g:colors_name = a:name
 endfunction
 
@@ -195,11 +199,6 @@ function! s:GenerateColourMap(Colours)
 	return field_colour_map
 endfunction
 
-function! s:StyleModifier(style)
-	let result = substitute(a:style, '&', ',', 'g')
-	return result
-endfunction
-
 function! s:StandardHandler(ColourScheme, details)
 	let Colours = a:ColourScheme[a:details]
 	let field_colour_map = s:GenerateColourMap(Colours)
@@ -218,13 +217,12 @@ function! s:StandardHandler(ColourScheme, details)
 				let field_colour_map[hlgroup][field] = a:ColourScheme['Colours'][field_colour_map[hlgroup][field]]
 			endif
 
-			if s:all_fields[field] == 'Style'
-				let modified_colours[hlgroup][field] = s:StyleModifier(field_colour_map[hlgroup][field])
-			elseif colour_map == 'None'
+			if colour_map == 'None' || s:all_fields[field] == 'Style'
 				let modified_colours[hlgroup][field] = field_colour_map[hlgroup][field]
 			elseif field_colour_map[hlgroup][field] == 'NONE'
 				let modified_colours[hlgroup][field] = 'NONE'
 			else
+				let s:need_to_write_cache = 1
 				let modified_colours[hlgroup][field] = 
 							\ EasyColour#Translate#FindNearest(colour_map, field_colour_map[hlgroup][field])
 			endif
@@ -286,8 +284,8 @@ function! s:AutoHandler(ColourScheme, basis, details)
 
 		for field in keys(standard_field_colour_map[hlgroup])
 			if s:all_fields[field] == 'Style'
-				" Use style modifier for style hints
-				let modified_colours[hlgroup][field] = s:StyleModifier(standard_field_colour_map[hlgroup][field])
+				" Don't modify style hints
+				let modified_colours[hlgroup][field] = standard_field_colour_map[hlgroup][field]
 				continue
 			elseif standard_field_colour_map[hlgroup][field] == 'NONE'
 				" Don't modify those specified as NONE
@@ -304,7 +302,7 @@ function! s:AutoHandler(ColourScheme, basis, details)
 			else
 				" Handle customised colours
 				if s:all_fields[field] != 'Style' && has_key(a:ColourScheme['Colours'], standard_field_colour_map[hlgroup][field])
-					let standard_field_colour_map[hlgroup][field] = a:ColourScheme['Colours'][standard_field_colour_map[hlgroup][field]]
+					let standard_field_colour_map[hlgroup][field] = a:ColourScheme['Colours']
 				endif
 				let std_colour = EasyColour#Translate#GetHexColour(standard_field_colour_map[hlgroup][field])
 				" Modify the colour if it's too dark or too light
@@ -326,13 +324,12 @@ function! s:AutoHandler(ColourScheme, basis, details)
 					endif
 				endif
 
-				if s:all_fields[field] == 'Style'
-					let modified_colours[hlgroup][field] = s:StyleModifier(modified_colour)
-				elseif colour_map == 'None'
+				if colour_map == 'None' || s:all_fields[field] == 'Style'
 					let modified_colours[hlgroup][field] = modified_colour
 				elseif modified_colours[hlgroup][field] == 'NONE'
 					" Leave as is
 				else
+					let s:need_to_write_cache = 1
 					let modified_colours[hlgroup][field] = 
 								\ EasyColour#Translate#FindNearest(colour_map, modified_colour)
 				endif
